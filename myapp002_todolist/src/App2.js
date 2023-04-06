@@ -24,7 +24,7 @@ function App() {
   const [todos, setTodos] = useState([...boardList]);
   const [input, setInput] = useState('');
 
-  const handelChangeText = (e) => {
+  const handleChangeText = (e) => {
     setInput(e.target.value);
   };
 
@@ -65,7 +65,7 @@ function App() {
     <div className='App' style={wrap}>
       <h1>TODO LIST</h1>
       <InputContext.Provider
-        value={{ insertTodo, input, handelChangeText, inputRef }}
+        value={{ insertTodo, input, handleChangeText, inputRef }}
       >
         <Input />
       </InputContext.Provider>

@@ -19,7 +19,7 @@ function App() {
   const [todos, setTodos] = useState([...boardList]);
   const [input, setInput] = useState('');
 
-  const handelChangeText = (e) => {
+  const handleChangeText = (e) => {
     setInput(e.target.value);
   };
 
@@ -64,7 +64,7 @@ function App() {
           type='text'
           required={true}
           value={input}
-          onChange={handelChangeText}
+          onChange={handleChangeText}
           ref={inputRef}
         />
         <input type='submit' value='Create' />
