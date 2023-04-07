@@ -13,10 +13,10 @@ function getBoardList(currentPage) {
 }
 
 //db접근 처리
-function getBoardDetail(num) {
+function getBoardDetail(num, config) {
   return async (dispatch) => {
     const data = await axios
-      .get(`${baseUrl}/board/view/${num}`)
+      .get(`${baseUrl}/board/view/${num}`, config)
       .then((response) => response.data);
     dispatch(boardReducers.getBoardDetail({ data }));
   };
@@ -34,10 +34,10 @@ function getBoardDownload(upload) {
   };
 }
 
-function getBoardDelete(num) {
+function getBoardDelete(num, config) {
   return async (dispatch) => {
     await axios
-      .delete(`${baseUrl}/board/delete/${num}`)
+      .delete(`${baseUrl}/board/delete/${num}`, config)
       .then((response) => response.data);
   };
 }
@@ -57,6 +57,7 @@ function getBoardUpdate(formData, config) {
       .then((response) => response.data);
   };
 }
+
 export const boardActions = {
   getBoardList,
   getBoardDetail,

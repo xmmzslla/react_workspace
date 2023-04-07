@@ -20,10 +20,35 @@ const LoginPage = () => {
   const onSubmit = async (e) => {
     //입력한 데이터를 보냄
     e.preventDefault();
-    await axios.post(`${baseUrl}/login`, inputs, config).then((response) => {
-      console.log('response:', response.data);
-    });
+    await axios
+      .post(`${baseUrl}/login`, inputs, config)
+      .then((response) => {
+        console.log('response:', response.data);
+        // let jwToken = response.headers['Authorization'];
+        let jwtToken = response.headers.get('Authorization');
+        console.log('jwtToken', jwtToken);
+
+        let jwtMemberName = response.data.memberName;
+        let jwtMemberEmail = response.data.memberEmail;
+        let jwtAuthRole = response.data.authRole;
+
+        localStorage.setItem('Authorization', jwtToken);
+        localStorage.setItem('memberEmail', jwtMemberEmail);
+        localStorage.setItem('memberName', jwtMemberName);
+        localStorage.setItem('authRole', jwtAuthRole);
+        localStorage.setItem('isLogin', true);
+
+        setInputs({ memberEmail: '', memberPass: '' });
+      })
+      .then((response) => {
+        // navigator('/');
+        window.location.replace('/');
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
   };
+
   return (
     <div className='container text-center mt-5'>
       <div className='mx-5'>
